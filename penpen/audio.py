@@ -15,7 +15,7 @@ from mutagen.id3 import ID3, APIC
 from mutagen.mp3 import MP3
 
 # Custom modules
-import fileUtils
+from . import fileUtils
 
 
 # Configure logger globally
@@ -103,9 +103,9 @@ def addID3Tags(filename, config, title, desc):
 
     # Set tags
     metaData['title'] = title
-    metaData['artist'] = unicode(config['episodeAuthor'])
-    metaData['date'] = unicode(str(datetime.datetime.now().year))
-    metaData['album'] = unicode(config['rssTitle'])
+    metaData['artist'] = str(config['episodeAuthor'])
+    metaData['date'] = str(str(datetime.datetime.now().year))
+    metaData['album'] = str(config['rssTitle'])
     metaData.save()
 
 
@@ -135,7 +135,7 @@ def addCoverArt(filename, config):
     # Set the image tags
     imageTag.encoding = 3  # 3 is for utf-8
     imageTag.type = 3      # 3 is for cover image
-    imageTag.desc = u'Cover'
+    imageTag.desc = 'Cover'
 
     with open(imageFilepath, 'rb') as f:
         imageTag.data = f.read()

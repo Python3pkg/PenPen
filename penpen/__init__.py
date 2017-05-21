@@ -1,6 +1,6 @@
 """PenPen package init script."""
 
-import core
+from . import core
 
 
 def main():

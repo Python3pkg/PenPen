@@ -14,7 +14,7 @@ try:
 except ImportError:
     import xml.etree.ElementTree as ET
 
-import fileUtils
+from . import fileUtils
 
 # Configure logger globally
 logging.basicConfig(level=logging.DEBUG)
@@ -27,7 +27,7 @@ def generateXml(config, newEpisode):
     namespaces = {'itunes': "http://www.itunes.com/dtds/podcast-1.0.dtd",
                   'atom': "http://www.w3.org/2005/Atom"}
 
-    for prefix, uri in namespaces.iteritems():
+    for prefix, uri in namespaces.items():
         ET.register_namespace(prefix, uri)
 
     # Initialize the root node
@@ -203,7 +203,7 @@ def getOldEpisodes(config, rss, chan, namespaces):
 
     # No items were added, then add all namespace attributes manually.
     if not itemsAdded:
-        for prefix, uri in namespaces.iteritems():
+        for prefix, uri in namespaces.items():
             rss.set("xmlns:" + prefix, uri)
 
     return items, firstYear
@@ -330,7 +330,7 @@ def generateCopyrightStr(config, firstYear):
         copyrightStr = "©" + firstYear + "—" + thisYear + " " + \
                        config['rssAuthor'] + ". All rights reserved."
 
-    return unicode(copyrightStr, 'utf-8')
+    return str(copyrightStr, 'utf-8')
 
 
 def getFormattedUtcTime():

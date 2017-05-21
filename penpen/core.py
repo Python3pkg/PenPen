@@ -5,8 +5,8 @@ import argparse
 import logging
 import os
 
-import audio
-import rss
+from . import audio
+from . import rss
 
 # Configure logger globally
 logging.basicConfig(level=logging.DEBUG)
@@ -35,7 +35,7 @@ def validateTextField(fieldName, field):
     """Validate a text field. Prompt if empty."""
     # Get the title if it wasn't passed in on the command line.
     if not field:
-        field = unicode(raw_input("Enter the episode " + fieldName.lower() +
+        field = str(input("Enter the episode " + fieldName.lower() +
                                   ": "))
 
         # Check that something was entered, enforcing a non-empty title
